@@ -1,0 +1,14 @@
+.reader {
+    align-items: center;
+    display: flex;
+    height: 70vw;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 70vw;
+}
+
+.video {
+    width: 100%;
+}
+
