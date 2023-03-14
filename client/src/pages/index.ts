@@ -1,5 +1,5 @@
 import Home from './home'
-import Scan from './scan'
+import New from './new'
 
 export const HomePage = Home
-export const ScanPage = Scan
+export const NewPage = New

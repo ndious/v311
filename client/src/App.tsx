@@ -2,31 +2,33 @@ import { Component, Match, Switch } from 'solid-js'
 import { createSignal } from 'solid-js'
 import 'reset-css'
 
-import { HomePage, ScanPage } from './pages'
+import { HomePage, NewPage } from './pages'
 import QrInput from './components/qr-input'
+import Theme, { light } from './components/theme'
 
 import styles from './App.module.css'
 
 const App: Component = () => {
-  const [page, setPage] = createSignal('home')
+  const [page, setPage] = createSignal('new')
   const [params, setParams] = createSignal({})
-  const href = (page:string, params:{} = {}) => {
+  const linkTo = (page:string, params:{} = {}) => {
     setPage(page)
     setParams(params)
   }
 
   return (
     <div class={styles.App}>
+      <Theme schema={light} />
       <div>
-        <div>Vault311</div>
+        <div>V311</div>
       </div>
       <QrInput />
       <Switch>
         <Match when={page() === 'home'}>
           <HomePage setPage={setPage} />
         </Match>
-        <Match when={page() === 'scan'}>
-          <ScanPage setPage={setPage} />
+        <Match when={page() === 'new'}>
+          <NewPage setPage={linkTo} params={params} />
         </Match>
       </Switch>
     </div>

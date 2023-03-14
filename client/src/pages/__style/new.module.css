@@ -1,0 +1,29 @@
+.new__wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  justify-content: center;
+}
+
+.new__btn {
+  align-items: center;
+  background-color: var(--primary);
+  border-radius: 10px;
+  color: var(--secondary);
+  display: flex; 
+  font-size: 16px;
+  font-weight: bold;
+  height: 50px;
+  justify-content: center;
+  margin: 15px auto;
+  position: relative;
+  width: 90vw;
+}
+
+.new__ico {
+  margin-right: 20px;
+  left: 15px;
+  position: absolute;
+}
+
