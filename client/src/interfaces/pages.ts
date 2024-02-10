@@ -1,10 +1,9 @@
 import type { Component, Accessor } from 'solid-js'
+import { Obj } from './global'
 
-type Params = { [key: string]: string|[] }
-
-export interface PageProps{
-    linkTo: (page: string, params: Params | null) => void,
-    params: Accessor<Params>,
+export interface PageProps {
+    linkTo: (page: string, params: Obj | null) => void,
+    params: Accessor<Obj>,
 }
 
 export type PageComponent = Component<PageProps>

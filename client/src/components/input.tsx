@@ -1,19 +1,11 @@
-import { Accessor, Component, createSignal, Setter, Show } from "solid-js";
+import { Accessor, Component, Show } from "solid-js";
+import { InputComponent } from "../interfaces/form";
 import styles from './__styles/input.module.css'
 
-interface InputProps {
-    name: string,
-    label: string,
-    onInput: Setter<string>,
-    error: Accessor<string>,
-}
+const noop = () => ''
 
-const Input:Component<InputProps> = ({ name, label, onInput, error }) => {
-    const [ value, setValue ] = createSignal('')
-    const onChange = (val: string) => { 
-        setValue(val)
-        onInput(val)
-    }
+const Input:InputComponent = ({ name, label, state, setState }) => {
+    const err: Accessor<string> =  noop
 
     return (
         <div class={styles.input__row}>
@@ -23,13 +15,13 @@ const Input:Component<InputProps> = ({ name, label, onInput, error }) => {
             </label>
             <input 
                 class={styles.input__field}
-                value={value()} 
-                onInput={({ target }) => onChange((target as HTMLInputElement).value)} 
+                value={state[name]} 
+                onInput={({ target }) => setState(name, (target as HTMLInputElement).value)} 
                 id={name} 
                 name={name} 
             />
-            <Show when={error().length !== 0}>
-                <div class={styles.input__err}>{error()}</div>
+            <Show when={err().length !== 0}>
+                <div class={styles.input__err}>{err()}</div>
             </Show>
         </div>
     )

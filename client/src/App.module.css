@@ -2,3 +2,10 @@
   height: 100vh;
   text-align: center;
 }
+
+.title {
+    color: var(--primary);
+    font-size: 17px;
+    font-weight: bold;
+    margin-top: 10px;
+}

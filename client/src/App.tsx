@@ -7,28 +7,34 @@ import QrInput from './components/qr-input'
 import Theme, { light } from './components/theme'
 
 import styles from './App.module.css'
+import { search } from './core/request'
 
 const App: Component = () => {
-  const [page, setPage] = createSignal('new')
+  const [page, setPage] = createSignal('unassigned')
   const [params, setParams] = createSignal({})
-  const linkTo = (page:string, params:{} = {}) => {
+  const linkTo = (page:string, params:{}|null) => {
     setPage(page)
-    setParams(params)
+    setParams(params ?? {})
+  }
+  const onSearchUpdate = (value: string) => {
+    search(value).then(({ type, payload }) => {
+        linkTo(type, payload)
+    })
   }
 
   return (
     <div class={styles.App}>
       <Theme schema={light} />
       <div>
-        <div>V311</div>
+        <div class={styles.title}>V311</div>
       </div>
-      <QrInput />
+      <QrInput minLength={2} onUpdate={onSearchUpdate}/>
       <Switch>
         <Match when={page() === 'home'}>
           <HomePage setPage={setPage} />
         </Match>
-        <Match when={page() === 'new'}>
-          <NewPage setPage={linkTo} params={params} />
+        <Match when={page() === 'unassigned'}>
+          <NewPage linkTo={linkTo} params={params} />
         </Match>
       </Switch>
     </div>
